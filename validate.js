@@ -17,7 +17,7 @@ var UNDEFINED_VALUE = undefined;
 
 
 // The error that is throwed when validation fails.
-var IllegalArgumentError = new Error;
+var IllegalArgumentError = Error;
 
 
 /** Generic function that validates an object if equals a value.
@@ -28,10 +28,9 @@ validate_not_value = function(obj, value, msg){
 }
 
 /** Validate object constructor */
-validate.Validate = function(){};
+var Validate = function(){};
 
-
-validate.Validate.prototype = {
+Validate.prototype = {
 	/** Validate an argument, throwing IllegalArgumentError if the argument is null.
 	 * Optionally it takes a message string argument for the error message. */
 	notNull: function(obj, msg){
@@ -74,7 +73,7 @@ validate.Validate.prototype = {
 
 	/** Validate an array, throwing IllegalArgumentError if the array contains a null element.
 	 * Optionally it takes a message string argument for the error message. */
-	noNullElements(arr, msg){
+	noNullElements: function(arr, msg){
 		this.isDefined(arr); // validate is defined
 		for(var i in arr){
 			validate_not_value(obj, NULL_VALUE, msg || 'Expected an array with no null elements');
@@ -82,14 +81,18 @@ validate.Validate.prototype = {
 	}
 }
 
-validate.Type = function(){};
-validate.Method = function(){};
-validate.Attribute = function(){};
+var Type = function(){};
+var Method = function(){};
+var Attribute = function(){};
 
-validate.Type.prototype = {};
+Type.prototype = {};
 
-validate.Method.prototype = {};
+Method.prototype = {};
 
-validate.Attribute.prototype = {};
+Attribute.prototype = {};
 
+
+// "Export" Validate class
+validate.Validate = new Validate();
+validate.IllegalArgumentError = IllegalArgumentError;
 })();
