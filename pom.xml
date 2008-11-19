@@ -45,6 +45,20 @@
       <name>Codehaus Snapshots</name>
       <url>http://snapshots.repository.codehaus.org</url>
     </repository>
+    <repository>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>false</enabled></snapshots>
+      <id>zauber-code-releases</id>
+      <name>Zauber Code Releases</name>
+      <url>https://repo1.zauber.com.ar/zauber/code/releases</url>
+    </repository>
+    <repository>
+      <releases><enabled>false</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+      <id>zauber-code-snapshots</id>
+      <name>Zauber Code Snapshots</name>
+      <url>https://repo1.zauber.com.ar/zauber/code/snapshots</url>
+    </repository>
   </repositories>
 
   <build>
