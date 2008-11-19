@@ -22,8 +22,8 @@ var IllegalArgumentError = Error;
 
 /** Generic function that validates an object if equals a value.
  * Throws IllegalArgumentError if the obj equals the value. */
-validate_not_value = function(obj, value, msg){
-	if (obj == value)
+var validate_not_value = function(obj, value, msg){
+	if (obj === value)
 		throw new IllegalArgumentError(msg);
 }
 
@@ -59,7 +59,7 @@ Validate.prototype = {
 	 *  Optionally it takes a message string argument for the error message. */
 	hasProperty: function(obj, prop, msg){
 		this.isDefined(obj, msg || 'Expected a defined argument.');
-		this.isDefined(obj.prop, msg || 'Expected a defined property.');
+		this.isDefined(obj[prop], msg || 'Expected a defined property.');
 	},
 	
 	/** Validate an array, throwing IllegalArgumentError if the array is empty (null or no elements).
@@ -67,7 +67,7 @@ Validate.prototype = {
 	notEmpty: function(arr, msg){
 		this.isDefined(arr, msg || 'Expected a defined array.');
 		this.hasProperty(arr,'length', msg || 'Expected an array argument.');
-		if (this.arr.length == 0)
+		if (arr.length == 0)
 			throw new IllegalArgumentError(msg || 'Expected a not empty array.');
 	},
 
@@ -76,7 +76,7 @@ Validate.prototype = {
 	noNullElements: function(arr, msg){
 		this.isDefined(arr); // validate is defined
 		for(var i in arr){
-			validate_not_value(obj, NULL_VALUE, msg || 'Expected an array with no null elements');
+			validate_not_value(arr[i], NULL_VALUE, msg || 'Expected an array with no null elements');
 		}
 	}
 }
