@@ -1,20 +1,44 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.    
+ */
+
 /**
- * validate.js - version: 1.0
- * Marcos J. Medrano <marcos[at]zauber.com.ar>
+ * DefensiveJS
+ *
+ * @version 0.0-SNAPSHOT
+ *
+ * @fileOverview Javascript validation library to perform Defensive Programming. (inspired on org.apache.commons.lang.Validate)
+ * @author Marcos J. Medrano <marcos [at] zauber [dot] com [dot] ar>
+ * @see <a href="http://commons.apache.org/lang/apidocs/org/apache/commons/lang/Validate.html">org.apache.commons.lang.Validate</a>.
+ * @see <a href="http://en.wikipedia.org/wiki/Defensive_programming">Defensive Programming</a>
  */
 
 
-// validate namespace
+// define the 'validate' namespace
 var validate = {};
 
 
-// private namespace
+// anonymous function to provide a 'private' namespace
 (function(){
 
 
 var NULL_VALUE = null;
 var UNDEFINED_VALUE = undefined;
-
 
 // The error that is throwed when validation fails.
 var IllegalArgumentError = Error;
@@ -97,4 +121,6 @@ Attribute.prototype = {};
 // "Export" Validate class
 validate.Validate = new Validate();
 validate.IllegalArgumentError = IllegalArgumentError;
+
 })();
+
