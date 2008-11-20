@@ -73,7 +73,7 @@ Validate.prototype = {
 
 	/** Validate an array, throwing IllegalArgumentError if the array contains a null element.
 	 * Optionally it takes a message string argument for the error message. */
-	noNullElements: function(arr, msg){
+	definedElements: function(arr, msg){
 		this.isDefined(arr); // validate is defined
 		for(var i in arr){
 			validate_not_value(arr[i], NULL_VALUE, msg || 'Expected an array with no null elements');
