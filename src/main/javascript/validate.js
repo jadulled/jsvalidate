@@ -53,6 +53,8 @@ Validate.prototype = {
 	/** Validate an argument, throwing IllegarArgumentError if the argument is not a function.
 	 *  Optionally it takes a message string argument for the error message. */
 	isFunction: function(func, msg){
+		if (typeof(func) != typeof(function (){}))
+			throw new IllegalArgumentError(msg || "Expected a function argument.");
 	},
 
 	/** Validate an argument, throwing IllegalArgumentError if the object does not have the property prop.
