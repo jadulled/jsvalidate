@@ -64,8 +64,12 @@ Validate.prototype = {
 	/** Validate an argument, throwing IllegalArgumentError if the argument is not defined.
 	 * Optionally it takes a message string argument for the error message. */
 	isDefined: function(obj, msg){
-		this.notNull(obj, msg || "Expected a defined argument.");
-		this.notUndefined(obj, msg || "Expected a defined argument.")
+		try{
+			this.notNull(obj);
+			this.notUndefined(obj);
+		}catch(e){
+			this.throwError(msg || "Expected a defined argument.");
+		}
 	},
 
 	/** Validate an argument, throwing IllegarArgumentError if the argument is not a function.
@@ -78,23 +82,35 @@ Validate.prototype = {
 	/** Validate an argument, throwing IllegalArgumentError if the object does not have the property prop.
 	 *  Optionally it takes a message string argument for the error message. */
 	hasProperty: function(obj, prop, msg){
-		this.isDefined(obj, msg || 'Expected a defined argument.');
-		this.isDefined(obj[prop], msg || 'Expected a defined property.');
+		try{
+			this.isDefined(obj);
+			this.isDefined(obj[prop]);
+		}catch(e){
+			this.throwError(msg || "Expected a defined property.")
+		}
 	},
 	
 	/** Validate an array, throwing IllegalArgumentError if the array is empty (null or no elements).
 	 *  Optionally it takes a message string argument for the error message. */
 	notEmpty: function(arr, msg){
-		this.isDefined(arr, msg || 'Expected a defined array.');
-		this.hasProperty(arr,'length', msg || 'Expected an array argument.');
+		try{
+			this.isDefined(arr);
+			this.hasProperty(arr, "length");
+		}catch(e){
+			this.throwError(msg || "Expected an array argument.")
+		}
 		if (arr.length == 0)
-			this.throwError(msg || 'Expected a not empty array.');
+			this.throwError(msg || "Expected a not empty array.");
 	},
 
 	/** Validate an array, throwing IllegalArgumentError if the array contains a null element.
 	 * Optionally it takes a message string argument for the error message. */
 	definedElements: function(arr, msg){
-		this.isDefined(arr); // validate is defined
+		try{
+			this.isDefined(arr);
+		}catch(e){
+			this.throwError(msg || "Expected an array argument.");
+		}
 		for(var i in arr)
 			this.notNull(arr[i],msg || 'Expected an array with no null elements');
 	},
