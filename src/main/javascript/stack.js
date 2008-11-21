@@ -43,7 +43,7 @@ if (!existsComponentsStack()) throw new Error("Components.stack not defined.");
 if (!existsErrorProperties()) throw new Error("Error object must implement required properties.")
 
 // redefine showErrorMessage to show stack information.
-validate.Validate.throwError = function(errorMessage){
+validate.IllegalArgumentError = function(errorMessage){
     // get the caller that called the validate function.
 	var caller = Components.stack.caller.caller;
 	if (caller.name == "dispatch")
@@ -58,7 +58,7 @@ validate.Validate.throwError = function(errorMessage){
 	error.lineNumber = caller.lineNumber;
 	
 	// throw IllegalArgumentError
-	throw error;
+	return error;
 }
 
 /** checks that Components.stack exists */
