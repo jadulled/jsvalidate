@@ -18,15 +18,14 @@
  */
 
 /**
- * DefensiveJS.
+ * @fileOverview DefensiveJS: Javascript validation library to perform Defensive Programming.
  * 
+ * More info:
+ * <a href="http://commons.apache.org/lang/apidocs/org/apache/commons/lang/Validate.html">org.apache.commons.lang.Validate</a>
+ * <a href="http://en.wikipedia.org/wiki/Defensive_programming">Defensive Programming</a>
+ *  
  * @author Marcos J. Medrano <marcos [at] zauber [dot] com [dot] ar>
  * @version 0.0-SNAPSHOT
- *
- * @fileOverview Javascript validation library to perform Defensive Programming. (inspired on org.apache.commons.lang.Validate)
- *
- * @see <a href="http://commons.apache.org/lang/apidocs/org/apache/commons/lang/Validate.html">org.apache.commons.lang.Validate</a>
- * @see <a href="http://en.wikipedia.org/wiki/Defensive_programming">Defensive Programming</a>
  */
 
 
