@@ -29,7 +29,7 @@
  * @see <a href="https://developer.mozilla.org/en/Components.stack">Mozilla Components.stack</a>
  * 
  * @author Marcos J. Medrano <marcos [at] zauber [dot] com [dot] ar>
- * @version 0.0-SNAPSHOT
+ * @version 0.1
  */
  
 // "import" validate class
