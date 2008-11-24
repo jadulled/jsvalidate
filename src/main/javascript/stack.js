@@ -20,15 +20,16 @@
  */
 
 /**
- * DefensiveJS
- * @file stack.js
- * @version 0.0-SNAPSHOT
- *
+ * stack.js
+ * 
  * @fileOverview This file uses Mozilla Stack Component and Mozilla Error object to improve error messages.
- *
- * @author Marcos J. Medrano <marcos [at] zauber [dot] com [dot] ar>
+ * 
+ * More Info:
  * @see <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error">Mozilla Error Object</a>.
  * @see <a href="https://developer.mozilla.org/en/Components.stack">Mozilla Components.stack</a>
+ * 
+ * @author Marcos J. Medrano <marcos [at] zauber [dot] com [dot] ar>
+ * @version 0.0-SNAPSHOT
  */
  
 // "import" validate class
@@ -44,9 +45,9 @@ if (!existsComponentsStack()) throw new Error("Components.stack not defined.");
 // checks that the Error objects has the required properties
 if (!existsErrorProperties()) throw new Error("Error object must implement required properties.")
 
-// redefine showErrorMessage to show stack information.
+// overwrites IllegalArgumentError to show stack information.
 validate.IllegalArgumentError = function(errorMessage){
-    // get the caller that called the validate function.
+	// get the caller that called the validate function.
 	var caller = Components.stack.caller.caller;
 	if (caller.name == "dispatch")
 		caller = caller.caller;

@@ -20,7 +20,8 @@
  */
 
 /**
- * @fileOverview DefensiveJS: Javascript validation library to perform Defensive Programming.
+ * validate.js
+ * @fileOverview Javascript validation library to perform Defensive Programming.
  * 
  * More info:
  * <a href="http://commons.apache.org/lang/apidocs/org/apache/commons/lang/Validate.html">org.apache.commons.lang.Validate</a>
