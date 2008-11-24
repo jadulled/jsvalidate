@@ -21,11 +21,10 @@
 
 /**
  * validate.js
- * @fileOverview Javascript validation library to perform Defensive Programming.
+ * @fileOverview Javascript validation library to perform common validations and type checking.
  * 
  * More info:
  * <a href="http://commons.apache.org/lang/apidocs/org/apache/commons/lang/Validate.html">org.apache.commons.lang.Validate</a>
- * <a href="http://en.wikipedia.org/wiki/Defensive_programming">Defensive Programming</a>
  *  
  * @author Marcos J. Medrano <marcos [at] zauber [dot] com [dot] ar>
  * @version 0.0-SNAPSHOT
@@ -35,7 +34,7 @@
 /**
  * Define the 'validate' namespace 
  * @name validate
- * @namespace Holds all DefensiveJS classes. 
+ * @namespace Holds all validate classes. 
  */
 var validate = {};
 
