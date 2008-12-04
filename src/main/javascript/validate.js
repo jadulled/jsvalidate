@@ -53,11 +53,7 @@ var UNDEFINED_VALUE = undefined;
  * @class Holds validation static methods.
  * @memberOf validate 
  */
-var Validate = function(){
-	function throwError(errorMessage){
-		throw new IllegalArgumentError(errorMessage);
-	}
-};
+var Validate = function(){};
 
 Validate.prototype = {
 	/** 
@@ -198,7 +194,10 @@ Validate.prototype = {
 		}
 		for(var i in arr)
 			this.notNull(arr[i],msg || 'Expected an array with all the elements defined');
-	}
+	},
+	throwError: function(errorMessage){
+        throw new validate.IllegalArgumentError(errorMessage);
+    }
 }
 
 var Type = function(){};
