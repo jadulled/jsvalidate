@@ -151,7 +151,7 @@ Validate.prototype = {
 			this.isDefined(obj);
 			this.isDefined(obj[prop]);
 		}catch(e){
-			this.throwError(msg || "Expected a defined property.")
+			this.throwError(msg || "Expected a defined property: " + prop + ".\n Got(" + obj[prop] + ")")
 		}
 	},
 	
