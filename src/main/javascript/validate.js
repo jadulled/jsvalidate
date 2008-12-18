@@ -154,7 +154,7 @@ Validate.prototype = {
         this.isString(string);
         if (!(string.length > 0))
             this.throwError(msg || "Expected a non empty string argument.");
-    }
+    },
     
 	/** 
 	 * Validate an argument, throwing IllegalArgumentError if the object does not have the property prop.
