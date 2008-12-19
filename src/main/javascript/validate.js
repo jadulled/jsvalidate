@@ -124,6 +124,21 @@ Validate.prototype = {
 			this.throwError(msg || "Expected a function argument.");
 	},
 
+    /** 
+     * Validate an argument, throwing IllegarArgumentError if the argument is not a number.
+     * Optionally it takes a message string argument for the error message. 
+     *
+     * @name validate.Validate#isFunction
+     * @methodOf validate.Validate
+     * @throws {IllegalArgumentError} If argument is not a function. 
+     * @param {Number} number a number object to validate.
+     * @param {String} [msg="Expected a function argument."] message to show if a validation error.
+     */
+    isNumber: function(number, msg){
+        if (typeof(number) != typeof(1))
+            this.throwError(msg || "Expected a number argument.");
+    },
+	
 	/** 
 	 * Validate an argument, throwing IllegalArgumentError if the object does not have the property prop.
 	 * Optionally it takes a message string argument for the error message. 
