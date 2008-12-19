@@ -124,17 +124,38 @@ Validate.prototype = {
      * Validate an argument, throwing IllegarArgumentError if the argument is not a number.
      * Optionally it takes a message string argument for the error message. 
      *
-     * @name validate.Validate#isFunction
+     * @name validate.Validate#isNumber
      * @methodOf validate.Validate
-     * @throws {IllegalArgumentError} If argument is not a function. 
+     * @throws {IllegalArgumentError} If argument is not a number. 
      * @param {Number} number a number object to validate.
-     * @param {String} [msg="Expected a function argument."] message to show if a validation error.
+     * @param {String} [msg="Expected a number argument."] message to show if a validation error.
      */
     isNumber: function(number, msg){
         if (typeof(number) != typeof(1))
             this.throwError(msg || "Expected a number argument.");
     },
-	
+
+    /** 
+     * Validate an argument, throwing IllegarArgumentError if the argument is not a string.
+     * Optionally it takes a message string argument for the error message. 
+     *
+     * @name validate.Validate#isString
+     * @methodOf validate.Validate
+     * @throws {IllegalArgumentError} If argument is not a string. 
+     * @param {String} string a string object to validate.
+     * @param {String} [msg="Expected a string argument."] message to show if a validation error.
+     */
+    isString: function(string, msg){
+        if (typeof(string) != typeof('string'))
+            this.throwError(msg || "Expected a string argument.");
+    },
+    
+    isNonEmptyString: function(string, msg){
+        this.isString(string);
+        if (!(string.length > 0))
+            this.throwError(msg || "Expected a non empty string argument.");
+    }
+    
 	/** 
 	 * Validate an argument, throwing IllegalArgumentError if the object does not have the property prop.
 	 * Optionally it takes a message string argument for the error message. 
