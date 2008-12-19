@@ -48,22 +48,12 @@ if (!existsErrorProperties()) throw new Error("Error object must implement requi
 // overwrites IllegalArgumentError to show stack information.
 validate.IllegalArgumentError = function(errorMessage){
 	// get the caller that called the validate function.
-	var caller = Components.stack.caller.caller.caller;
+	var caller = Components.stack.caller.caller;
 	if (caller.name == "dispatch")
 		caller = caller.caller;
-	
-	var stackCaller = caller;
-	var stackTrace = "";
-	while (stackCaller){
-	    stackTrace = stackTrace + "\n -->" + stackCaller;
-	    stackCaller = stackCaller.caller;
-	}
-	
-	var errMsg = errorMessage;
-	errMsg = errMsg + "\n\nStack Trace:" + stackTrace; 
-	
+		
 	// create a new error
-	var error = new Error(errMsg);
+	var error = new Error(errorMessage);
 	
 	// modify error properties
 	error.name = "IllegalArgumentError";
