@@ -3,13 +3,13 @@
   <parent>
      <artifactId>bare</artifactId>
      <groupId>ar.com.zauber.maven.poms</groupId>
-     <version>1.0.5</version>
+     <version>1.0.6</version>
   </parent>
-
+  
   <modelVersion>4.0.0</modelVersion>
   <groupId>ar.com.zauber.javascript.validate</groupId>
   <artifactId>validate</artifactId>
-  <packaging>javascript</packaging>
+  <packaging>jar</packaging>
   <version>0.0-SNAPSHOT</version>
   <name>Validation Utils</name>
 
@@ -27,34 +27,8 @@
        <distribution>repo</distribution>
      </license>
   </licenses>
-  <inceptionYear>2008</inceptionYear>
 
-
-
-   <pluginRepositories>
-    <pluginRepository>
-      <id>codehaus-snapshots</id>
-      <name>Codehaus snapshots</name>
-      <url>http://snapshots.repository.codehaus.org</url>
-      <snapshots> <enabled>true</enabled> </snapshots>
-      <releases> <enabled>false</enabled> </releases>
-    </pluginRepository>
-  </pluginRepositories>
   <repositories>
-    <repository>
-      <releases><enabled>true</enabled></releases>
-      <snapshots><enabled>false</enabled></snapshots>
-      <id>codehaus-releases</id>
-      <name>Codehaus Releases</name>
-      <url>http://snapshots.repository.codehaus.org</url>
-    </repository>
-    <repository>
-      <releases><enabled>false</enabled></releases>
-      <snapshots><enabled>true</enabled></snapshots>
-      <id>codehaus-snapshots</id>
-      <name>Codehaus Snapshots</name>
-      <url>http://snapshots.repository.codehaus.org</url>
-    </repository>
     <repository>
       <releases><enabled>true</enabled></releases>
       <snapshots><enabled>false</enabled></snapshots>
@@ -72,43 +46,53 @@
   </repositories>
 
   <build>
-    <outputDirectory>target/scripts</outputDirectory>
-    <testOutputDirectory>target/test-scripts</testOutputDirectory>
-    <extensions>
-      <extension>
-        <groupId>org.codehaus.mojo.javascript</groupId>
-        <artifactId>javascript-maven-plugin</artifactId>
-        <version>1.0-alpha-1-SNAPSHOT</version>
-      </extension>
-    </extensions>
     <plugins>
       <plugin>
-        <groupId>org.codehaus.mojo.javascript</groupId>
-        <artifactId>javascript-maven-plugin</artifactId>
-        <extensions>true</extensions>
-        <executions>
-          <execution>
-            <id>compress</id>
-            <phase>package</phase>
-            <goals>
-              <goal>attach-compressed</goal>
-            </goals>
+        <groupId>de.berlios.jsunit</groupId>
+	    <artifactId>jsunit-maven2-plugin</artifactId>
+	    <version>1.3</version>
+	    <extensions>true</extensions>
+	    <executions>
+	      <execution>
+	        <phase>test</phase>
+	        <goals>
+	          <goal>jsunit-test</goal>
+	        </goals>
+	        <configuration>
+	        
+              <!-- src -->
+              <sourceDirectory>src/main/javascript</sourceDirectory>
+              <sources>
+                <source>validate.js</source>
+              </sources>
+               
+              <!-- test -->
+              <testSourceDirectory>src/test/javascript</testSourceDirectory>
+              <testSuites>
+                <testSuite>
+                  <name>Validate</name>
+                </testSuite>
+              </testSuites>
+              
+              <!-- report -->
+              <reportsDirectory>target/surefire-reports</reportsDirectory>
+            </configuration>
           </execution>
         </executions>
-
       </plugin>
     </plugins>
   </build>
+    
   <developers>
-     <developer>
-         <name>Marcos Medrano</name>
-         <id>marcos</id>
-         <organization>Zauber S.A.</organization>
-         <organizationUrl>http://www.zauber.com.ar/</organizationUrl>
-         <roles>
-           <role>Developer</role>
-        </roles>
-        <timezone>-3</timezone>
-     </developer>
+    <developer>
+      <name>Marcos Medrano</name>
+      <id>marcos</id>
+      <organization>Zauber S.A.</organization>
+      <organizationUrl>http://www.zauber.com.ar/</organizationUrl>
+      <roles>
+        <role>Developer</role>
+	  </roles>
+	  <timezone>-3</timezone>
+    </developer>
   </developers>
 </project>
