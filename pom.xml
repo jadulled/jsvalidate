@@ -70,7 +70,7 @@
               <testSourceDirectory>src/test/javascript</testSourceDirectory>
               <testSuites>
                 <testSuite>
-                  <name>Validate</name>
+                  <name>JS-Validate</name>
                 </testSuite>
               </testSuites>
               
@@ -82,7 +82,15 @@
       </plugin>
     </plugins>
   </build>
-    
+  
+  <dependencies>
+    <dependency>
+      <groupId>ar.com.zauber.commons.test</groupId>
+      <artifactId>commons-test-javascript</artifactId>
+      <version>3.16-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  
   <developers>
     <developer>
       <name>Marcos Medrano</name>
