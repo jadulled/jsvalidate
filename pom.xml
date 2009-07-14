@@ -87,7 +87,7 @@
     <dependency>
       <groupId>ar.com.zauber.commons.test</groupId>
       <artifactId>commons-test-javascript</artifactId>
-      <version>3.16-SNAPSHOT</version>
+      <version>3.16</version>
     </dependency>
   </dependencies>
   
