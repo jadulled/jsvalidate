@@ -1,3 +1,4 @@
+package ar.com.zauber.javascript.validate;
 /*
  * Copyright (c) 2005-2008 Zauber S.A. <http://www.zauber.com.ar/>
  *
