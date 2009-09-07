@@ -215,3 +215,152 @@ ValidateTest.prototype.testDefinedElements = function (){
        // definedElements working ok with invalid arrays (some undefined elements).
    }
 }
+
+/**
+* this function tests Validate.isType with type specified to compare
+*/
+ValidateTest.prototype.testIsType = function (){
+    
+    var bool = true;
+    try{ 
+        Validate.isType(bool, 'boolean');
+    }catch(e){
+        fail("isType shouldn't raise an exception with type specified.");
+    }
+    
+    var bool = 1;
+    try{ 
+        Validate.isType(bool, 'boolean');
+        fail("isType should raise an exception with type specified.");
+    }catch(e){}
+}
+
+/**
+* this function tests Validate.allElementsOfType with all-defined-elements and not defined-elements
+* array with different types to compare
+*/
+ValidateTest.prototype.testAllElementsOfType = function (){    
+    
+    var arr = new Array(false, false, true, true);
+    try{ 
+        Validate.allElementsOfType(arr, 'boolean'); 
+    }catch(e){
+        fail("allElementsOfType shouldn't raise an exception with an all-defined-elements array with type specified.");
+    }
+    
+    arr = new Array(new Object(), new Object(), new Object(), new Object());
+    try{ 
+        Validate.allElementsOfType(arr, 'object'); 
+    }catch(e){
+        fail("allElementsOfType shouldn't raise an exception with an all-defined-elements array with type specified.");
+    }
+    
+    arr = new Array(null, new Object(), new Object(), new Object());
+    try{ 
+        Validate.allElementsOfType(arr, 'object');
+        fail("allElementsOfType should raise an exception with a not defined element.");
+    }catch(e){}
+    
+    arr = new Array(1, 1, 1, true);
+    try{ 
+        Validate.allElementsOfType(arr, 'number');
+        fail("allElementsOfType should raise an exception with a boolean element instead of a number type.");
+    }catch(e){}
+}
+
+/**
+* this function tests Validate.isTrue with a certain variety of true, false expressions
+*/
+ValidateTest.prototype.testIsTrue = function (){  
+
+    var expression = 1 == 1;
+    try{ 
+        Validate.isTrue(expression); 
+    }catch(e){
+        fail("isTrue shouldn't raise an exception with true expression");
+    }
+    
+    var expression = 1 == 0;
+    try{ 
+        Validate.isTrue(!expression); 
+    }catch(e){
+        fail("isTrue shouldn't raise an exception with false expression");
+    }
+    
+    var expression = new Object();
+    try{ 
+        Validate.isTrue(expression); 
+        fail("isTrue should raise an exception with expression not type of boolean");
+    }catch(e){}
+    
+    var expression = null;
+    try{ 
+        Validate.isTrue(expression); 
+        fail("isTrue should raise an exception with null expression ");
+    }catch(e){}
+    
+}
+
+/**
+* this function tests Validate.isTrue with a certain variety of true, false expressions
+*/
+ValidateTest.prototype.testIsNotBlankString = function (){  
+
+    var string = "lalala";   
+    try{ 
+        Validate.isNotBlankString(string); 
+    }catch(e){
+        fail("isNotBlankString shouldn't raise an exception with defined not blank string");
+    }
+    
+    string = "";   
+    try{ 
+        Validate.isNotBlankString(string);
+        fail("isNotBlankString should raise an exception with defined empty string");   
+    }catch(e){}
+    
+    string = null;   
+    try{ 
+        Validate.isNotBlankString(string);
+        fail("isNotBlankString should raise an exception with not defined string");   
+    }catch(e){}
+    
+    string = " ";   
+    try{ 
+        Validate.isNotBlankString(string);
+        fail("isNotBlankString should raise an exception with blank string");   
+    }catch(e){}
+}
+
+/**
+* this function tests Validate.isTrue with a certain variety of true, false expressions
+*/
+ValidateTest.prototype.testIsNonEmptyString = function (){  
+
+    var string = "lalala";   
+    try{ 
+        Validate.isNonEmptyString(string); 
+    }catch(e){
+        fail("isNonEmptyString shouldn't raise an exception with defined not empty string");
+    }
+    
+    string = "";   
+    try{ 
+        Validate.isNonEmptyString(string);
+        fail("isNonEmptyString should raise an exception with defined empty string");   
+    }catch(e){}
+    
+    string = null;   
+    try{ 
+        Validate.isNonEmptyString(string);
+        fail("isNonEmptyString should raise an exception with not defined string");   
+    }catch(e){}
+    
+    string = " ";   
+    try{ 
+        Validate.isNonEmptyString(string); 
+    }catch(e){
+        fail("isNonEmptyString shouldn't raise an exception with defined not empty string");       
+    }
+    
+}

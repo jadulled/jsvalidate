@@ -131,8 +131,7 @@ Validate.prototype = {
      * @param {String} [msg="Expected a number argument."] message to show if a validation error.
      */
     isNumber: function(number, msg){
-        if (typeof(number) != typeof(1))
-            this.throwError(msg || "Expected a number argument.");
+	    this.isType(string, 'number', msg || 'Expected number argument');
     },
 
     /** 
@@ -146,14 +145,55 @@ Validate.prototype = {
      * @param {String} [msg="Expected a string argument."] message to show if a validation error.
      */
     isString: function(string, msg){
-        if (typeof(string) != typeof('string'))
-            this.throwError(msg || "Expected a string argument.");
+        this.isType(string, 'string', msg || 'Expected string argument');
     },
     
+    /** 
+     * Validate an argument, throwing IllegarArgumentError if the string is empty.
+     * Optionally it takes a message string argument for the error message. 
+     *
+     * @name validate.Validate#isString
+     * @methodOf validate.Validate
+     * @throws {IllegalArgumentError} If string is empty. 
+     * @param {String} string a string object to validate.
+     * @param {String} [msg="Expected a string argument."] message to show if a validation error.
+     */
     isNonEmptyString: function(string, msg){
         this.isString(string);
         if (!(string.length > 0))
             this.throwError(msg || "Expected a non empty string argument.");
+    },
+    
+    /** 
+     * Validate an argument, throwing IllegarArgumentError if the string is blank.
+     * Optionally it takes a message string argument for the error message. 
+     *
+     * @name validate.Validate#isString
+     * @methodOf validate.Validate
+     * @throws {IllegalArgumentError} If string is blank. 
+     * @param {String} string a string object to validate.
+     * @param {String} [msg="Expected a string argument."] message to show if a validation error.
+     */
+    isNotBlankString: function(string, msg){
+        this.isString(string);
+        if (!(string.length > 0) && (string.replace(/^\s+|\s+$/g,"").length == 0))
+            this.throwError(msg || "Expected a non blank string argument.");
+    },
+    
+    /** 
+     * Validate an argument, throwing IllegarArgumentError if the expression is false
+     * Optionally it takes a message string argument for the error message. 
+     *
+     * @name validate.Validate#isString
+     * @methodOf validate.Validate
+     * @throws {IllegalArgumentError} If expression is false
+     * @param {String} [msg="Expected a string argument."] message to show if a validation error.
+     */
+    isTrue: function(expression, msg) {
+        this.isDefined(expression, msg);
+        this.isType(expression, 'boolean', msg);
+        if(!expression)
+            this.throwError(msg || "Expected a true expression.");
     },
     
 	/** 
@@ -215,7 +255,48 @@ Validate.prototype = {
 		}
 		for(var i in arr)
 			this.notNull(arr[i],msg || 'Expected an array with all the elements defined');
+		
 	},
+	
+	 /** 
+     * Validate an argument, throwing IllegalArgumentException if the argument 
+     * collection is null or has elements that are not of type clazz. 
+     * Optionally it takes a message string argument for the error message. 
+     *
+     * @name validate.Validate#allElementsOfType
+     * @methodOf validate.Validate
+     * @throws {IllegalArgumentError} If array argument has one or more elements not of type clazz.
+     * @param {Array} arr an array to validate.
+     * @param {Clazz} clazz is the type to validate.
+     * @param {String} [msg="Expected an array with all the elements defined."] message to show if a validation error.
+     */
+    allElementsOfType: function(arr, clazz, msg){
+        try{
+            this.definedElements(arr);            
+        }catch(e){
+            this.throwError(msg || "Expected an array argument with no null Elements.");
+        }
+        for(var i in arr)
+            this.isType(arr[i], clazz, msg || 'Expected an array with all the elements of type clazz');
+    },
+    
+    /** 
+     * Validate an argument, throwing IllegarArgumentError if the argument is not of type clazz.
+     * Optionally it takes a message string argument for the error message. 
+     *
+     * @name validate.Validate#isNumber
+     * @methodOf validate.Validate
+     * @throws {IllegalArgumentError} If argument is not of type clazz. 
+     * @param {Object} object to validate.
+     * @param {Clazz} clazz is the type to validate.
+     * @param {String} [msg="Expected a number argument."] message to show if a validation error.
+     */
+    isType: function(object, clazz, msg){
+        this.isDefined(object, msg);
+        if (typeof(object) != clazz)
+            this.throwError(msg || "Expected an argument of type ");
+    },    
+	
 	throwError: function(errorMessage){
         throw new validate.IllegalArgumentError(errorMessage);
     }
