@@ -1,6 +1,11 @@
 /**
  * Error - Unit Tests
- **/
+ * 
+ * @fileOverview This file has unit tests for Error library.
+ * @author Cecilia Hagge
+ * @see The <a href="http://commons.apache.org/lang/api-release/index.html">org.apache.commons.lang</a>.
+ */
+ 
 
 /** Test error.js */
 function ErrorTest(name)

@@ -27,7 +27,6 @@
  * <a href="http://commons.apache.org/lang/apidocs/org/apache/commons/lang/Validate.html">org.apache.commons.lang.Validate</a>
  *  
  * @author Marcos J. Medrano <marcos [at] zauber [dot] com [dot] ar>
- * @version 0.1
  */
 
 
