@@ -17,8 +17,6 @@ ValidateTest.prototype = new TestCase();
 //"import" validate class
 Validate = validate.Validate;
 
-//"import" validate class
-ValidateString = validate.ValidateString;
 
 /** 
  * this function tests Validate.notNull with many valid values and a null value 
@@ -305,78 +303,78 @@ ValidateTest.prototype.testIsTrue = function (){
 }
 
 /**
-* this function tests Validate.isTrue with a certain variety of true, false expressions
+* this function tests Validate.isNotBlankString with a different string arguments (null, empty, valid)
 */
 ValidateTest.prototype.testIsNotBlankString = function (){  
 
     var string = "lalala";   
     try{ 
-        ValidateString.isNotBlank(string); 
+        Validate.isNotBlankString(string); 
     }catch(e){
         throw new Error("isNotBlankString shouldn't raise an exception with defined not blank string");
     }
     
     string = "";   
     try{ 
-        ValidateString.isNotBlank(string);
+        Validate.isNotBlankString(string);
         throw new Error("isNotBlankString should raise an exception with defined empty string");   
     }catch(e){}
     
     string = null;   
     try{ 
-        ValidateString.isNotBlank(string);
+        Validate.isNotBlankString(string);
         throw new Error("isNotBlankString should raise an exception with not defined string");   
     }catch(e){}
     
     string = " ";   
     try{ 
-        ValidateString.isNotBlank(string);
+        Validate.isNotBlankString(string);
         throw new Error("isNotBlankString should raise an exception with blank string");   
     }catch(e){}
     
     string = "            ";   
     try{ 
-        ValidateString.isNotBlank(string);
+        Validate.isNotBlankString(string);
         throw new Error("isNotBlankString should raise an exception with blank string");   
     }catch(e){}
     
     string = "    abc    ";   
     try{ 
-        ValidateString.isNotBlank(string);
+        Validate.isNotBlankString(string);
     }catch(e){
         throw new Error("isNotBlankString shouldn't raise an exception with defined not blank string");
     }
 }
 
 /**
-* this function tests Validate.isTrue with a certain variety of true, false expressions
-*/
+* this function tests Validate.isNonEmptyString with different string arguments (null, empty, valid, blank) 
+* */
 ValidateTest.prototype.testIsNonEmptyString = function (){  
 
     var string = "lalala";   
     try{ 
-        ValidateString.isNonEmpty(string); 
+        Validate.isNonEmptyString(string); 
     }catch(e){
         throw new Error("isNonEmptyString shouldn't raise an exception with defined not empty string");
     }
     
     string = "";   
     try{ 
-        ValidateString.isNonEmpty(string);
+        Validate.isNonEmptyString(string);
         throw new Error("isNonEmptyString should raise an exception with defined empty string");   
     }catch(e){}
     
     string = null;   
     try{ 
-        ValidateString.isNonEmpty(string);
+        Validate.isNonEmptyString(string);
         throw new Error("isNonEmptyString should raise an exception with not defined string");   
     }catch(e){}
     
     string = " ";   
     try{
-        ValidateString.isNonEmpty(string);
+        Validate.isNonEmptyString(string);
     }catch(e){
-         throw new Error("isNonEmptyString shouldn't raise an exception with defined not empty string" + "(type: bla)");       
+         throw new Error("isNonEmptyString shouldn't raise an exception with defined not empty string");       
     }
     
 }

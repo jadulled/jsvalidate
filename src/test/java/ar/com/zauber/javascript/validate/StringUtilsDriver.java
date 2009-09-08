@@ -22,12 +22,11 @@ package ar.com.zauber.javascript.validate;
 import ar.com.zauber.commons.test.javascript.JsTestCase;
 
 /**
- * test de js desde eclipse
+ * Test de stringUtils.js desde eclipse
  * 
- * @author Pablo Grigolatto
- * @since Jul 10, 2009
+ * @author Cecilia Hagge
  */
-public class ValidateDriver extends JsTestCase {
+public class StringUtilsDriver extends JsTestCase {
    
     /** @see JsTestCase#getIncludes() */
     @Override
@@ -35,8 +34,7 @@ public class ValidateDriver extends JsTestCase {
         return new String[] {
             "src/main/javascript/error.js",
             "src/main/javascript/stringUtils.js",
-            "src/main/javascript/validate.js",
-            "src/test/javascript/ValidateTest.js"
+            "src/test/javascript/StringUtilsTest.js"
         };
     }
     
