@@ -33,6 +33,7 @@ public class ValidateDriver extends JsTestCase {
     @Override
     protected final String[] getIncludes() {
         return new String[] {
+            "src/main/javascript/error.js",
             "src/main/javascript/validate.js",
             "src/test/javascript/ValidateTest.js"
         };

@@ -38,13 +38,59 @@
  */
 var validate = {};
 
-
 // anonymous function to provide a 'private' namespace
 (function(){
 
 
 var NULL_VALUE = null;
 var UNDEFINED_VALUE = undefined;
+
+//"import" error class
+ErrorValidate= error.ErrorValidate;
+
+/** 
+ * ValidateString object constructor 
+ * @name validate.ValidateString
+ * @class Holds validation static methods.
+ * @memberOf validate 
+ */
+var ValidateString = function(){};
+
+ValidateString.prototype = {
+        
+        /** 
+         * Validate an argument, throwing IllegarArgumentError if the string is empty.
+         * Optionally it takes a message string argument for the error message. 
+         *
+         * @name validate.Validate#isString
+         * @methodOf validate.Validate
+         * @throws {IllegalArgumentError} If string is empty. 
+         * @param {String} string a string object to validate.
+         * @param {String} [msg="Expected a string argument."] message to show if a validation error.
+         */
+        isNonEmpty: function(string, msg){
+            validate.Validate.isString(string);
+            if (!(string.length > 0))
+                validate.Validate.throwError(msg || "Expected a non empty string argument.");
+        },
+        
+        /** 
+         * Validate an argument, throwing IllegarArgumentError if the string is blank.
+         * Optionally it takes a message string argument for the error message. 
+         *
+         * @name validate.Validate#isString
+         * @methodOf validate.Validate
+         * @throws {IllegalArgumentError} If string is blank. 
+         * @param {String} string a string object to validate.
+         * @param {String} [msg="Expected a string argument."] message to show if a validation error.
+         */
+        isNotBlank: function(string, msg){
+            validate.Validate.isString(string);
+            if (!(string.length > 0) && (string.replace(/^\s+$/g,"").length == 0))
+                validate.Validate.throwError(msg || "Expected a non blank string argument.");
+        },
+        
+}
 
 
 /** 
@@ -146,38 +192,6 @@ Validate.prototype = {
      */
     isString: function(string, msg){
         this.isType(string, 'string', msg || 'Expected string argument');
-    },
-    
-    /** 
-     * Validate an argument, throwing IllegarArgumentError if the string is empty.
-     * Optionally it takes a message string argument for the error message. 
-     *
-     * @name validate.Validate#isString
-     * @methodOf validate.Validate
-     * @throws {IllegalArgumentError} If string is empty. 
-     * @param {String} string a string object to validate.
-     * @param {String} [msg="Expected a string argument."] message to show if a validation error.
-     */
-    isNonEmptyString: function(string, msg){
-        this.isString(string);
-        if (!(string.length > 0))
-            this.throwError(msg || "Expected a non empty string argument.");
-    },
-    
-    /** 
-     * Validate an argument, throwing IllegarArgumentError if the string is blank.
-     * Optionally it takes a message string argument for the error message. 
-     *
-     * @name validate.Validate#isString
-     * @methodOf validate.Validate
-     * @throws {IllegalArgumentError} If string is blank. 
-     * @param {String} string a string object to validate.
-     * @param {String} [msg="Expected a string argument."] message to show if a validation error.
-     */
-    isNotBlankString: function(string, msg){
-        this.isString(string);
-        if (!(string.length > 0) && (string.replace(/^\s+|\s+$/g,"").length == 0))
-            this.throwError(msg || "Expected a non blank string argument.");
     },
     
     /** 
@@ -298,7 +312,7 @@ Validate.prototype = {
     },    
 	
 	throwError: function(errorMessage){
-        throw new validate.IllegalArgumentError(errorMessage);
+        throw ErrorValidate.IllegalArgumentError(errorMessage);
     }
 }
 
@@ -312,23 +326,9 @@ Method.prototype = {};
 
 Attribute.prototype = {};
 
-/** 
- * IllegalArgumentError object constructor 
- * @name validate.IllegalArgumentError
- * @class The error throwed by validation methods.
- * @memberOf validate 
- * @param {String} errorMessage the error message to show.
- */
-var IllegalArgumentError = function(errorMessage){
-	var error = new Error(errorMessage);
-	error.name = "IllegalArgumentError";
-	return error;
-};
-
-
 // "Export" Validate class
 validate.Validate = new Validate();
-validate.IllegalArgumentError = IllegalArgumentError;
+validate.ValidateString = new ValidateString();
 
 })();
 

@@ -63,6 +63,7 @@
               <!-- src -->
               <sourceDirectory>src/main/javascript</sourceDirectory>
               <sources>
+                <source>error.js</source>
                 <source>validate.js</source>
               </sources>
                
