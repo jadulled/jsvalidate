@@ -97,58 +97,68 @@ StringUtilsTest.prototype.testIsNonEmpty = function (){
 
 
 /**
-* this function tests StringUtils.trim with different string arguments (null, empty, valid, blank)
+* this function tests StringUtils.strip with different string arguments (null, empty, valid, blank)
 */
-StringUtilsTest.prototype.testTrim = function (){  
+StringUtilsTest.prototype.testStrip = function (){  
 
     var string = "lalala";   
     try{ 
-        var stringTrimmed = StringUtils.trim(string); 
-        if(stringTrimmed != "lalala") {
-            throw new Error(stringTrimmed + ": trim shouldn't raise an exception with defined not empty string");
+        var stringStripped = StringUtils.strip(string); 
+        if(stringStripped != "lalala") {
+            throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");
         }
     }catch(e){
-        throw new Error(stringTrimmed + ": trim shouldn't raise an exception with defined not empty string");
+        throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");
     }
     
     string = "";   
     try{ 
-        var stringTrimmed = StringUtils.trim(string); 
-        if(stringTrimmed != "") {
-            throw new Error(stringTrimmed + ": trim shouldn't raise an exception with defined empty string");
+        var stringStripped = StringUtils.strip(string); 
+        if(stringStripped != "") {
+            throw new Error(stringStripped + ": strip shouldn't raise an exception with defined empty string");
         }
     }catch(e){
-        throw new Error(stringTrimmed + ": trim shouldn't raise an exception with defined empty string");
+        throw new Error(stringStripped + ": strip shouldn't raise an exception with defined empty string");
     }
     
     string = null;   
     try{ 
-        var stringTrimmed = StringUtils.trim(string);
-        if(stringTrimmed != null) {
-            throw new Error(stringTrimmed + ": trim shouldn't raise an exception with not defined string");  
+        var stringStripped = StringUtils.strip(string);
+        if(stringStripped != null) {
+            throw new Error(stringStripped + ": strip shouldn't raise an exception with not defined string");  
         }
     }catch(e){
-        throw new Error(stringTrimmed + ": trim shouldn't raise an exception with not defined string");        
+        throw new Error(stringStripped + ": strip shouldn't raise an exception with not defined string");        
     }
     
     string = "   a a ";   
     try{
-        var stringTrimmed = StringUtils.trim(string); 
-        if(stringTrimmed != "a a") {
-            throw new Error(stringTrimmed + ": trim shouldn't raise an exception with defined not empty string");
+        var stringStripped = StringUtils.strip(string); 
+        if(stringStripped != "a a") {
+            throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");
         }
     }catch(e){
-         throw new Error(stringTrimmed + ": trim shouldn't raise an exception with defined not empty string");       
+         throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");       
+    }
+
+    string = "   a  a   a     ";   
+    try{
+        var stringStripped = StringUtils.strip(string); 
+        if(stringStripped != "a  a   a") {
+            throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");
+        }
+    }catch(e){
+         throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");       
     }
     
     string = "    ";   
     try{
-        var stringTrimmed = StringUtils.trim(string); 
-        if(stringTrimmed != "") {
-            throw new Error(stringTrimmed + ": trim shouldn't raise an exception with defined not empty string");
+        var stringStripped = StringUtils.strip(string); 
+        if(stringStripped != "") {
+            throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");
         }
     }catch(e){
-         throw new Error(stringTrimmed + ": trim shouldn't raise an exception with defined not empty string");       
+         throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");       
     }
 }
 
@@ -187,7 +197,7 @@ StringUtilsTest.prototype.testJoin = function (){
     }catch(e){
         throw new Error(string + ": join shouldn't raise an exception with null array elements");        
     }
-    
+       
     array = new Array();
     array.push('a');
     array.push('b');
@@ -210,6 +220,24 @@ StringUtilsTest.prototype.testJoin = function (){
          throw new Error(string + ": join shouldn't raise an exception with defined array elements");       
     }
     
+    try{
+        var string = StringUtils.join(array, ''); 
+        if(string != "abc") {
+            throw new Error(string + ": join shouldn't raise an exception with defined array elements");
+        }
+    }catch(e){
+         throw new Error(string + ": join shouldn't raise an exception with defined array elements");       
+    }
+    
+    try{
+        var string = StringUtils.join(array, '--'); 
+        if(string != "a--b--c") {
+            throw new Error(string + ": join shouldn't raise an exception with defined array elements");
+        }
+    }catch(e){
+         throw new Error(string + ": join shouldn't raise an exception with defined array elements");       
+    }
+    
     array = new Array();
     array.push(null);
     array.push('');
@@ -222,6 +250,103 @@ StringUtilsTest.prototype.testJoin = function (){
     }catch(e){
          throw new Error(string + ": join shouldn't raise an exception with defined array elements");       
     }
-    
 
+}
+
+/**
+* this function tests StringUtils.split with different string arguments (null, empty, valid, blank)
+*/
+StringUtilsTest.prototype.testSplit = function (){  
+
+    
+    var string = null;   
+    try{ 
+        var array = StringUtils.split(string, '*'); 
+        if(array != null) {
+            throw new Error(array + ": split shouldn't raise an exception with null string");
+        }
+    }catch(e){
+        throw new Error(array + ": split shouldn't raise an exception with null string");
+    }
+    
+    string = "";   
+    try{ 
+        var array = StringUtils.split(string, '*'); 
+        if(array.length != 0) {
+            throw new Error(array + ": split shouldn't raise an exception with empty string");
+        }
+    }catch(e){
+        throw new Error(array + ": split shouldn't raise an exception with empty string");
+    }
+    
+    string = "a.b.c";   
+    try{ 
+        var array = StringUtils.split(string, '.'); 
+        if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c')) {
+            throw new Error(array + ": split shouldn't raise an exception with valid string");
+        }
+    }catch(e){
+        throw new Error(array + ": split shouldn't raise an exception with valid string");
+    }
+    
+    string = "a...b.c";   
+    try{ 
+        var array = StringUtils.split(string, '.'); 
+        if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
+            throw new Error(array + ": split shouldn't raise an exception with valid string");
+        }
+    }catch(e){
+        throw new Error(array + ": split shouldn't raise an exception with valid string");
+    }
+    
+    string = "a:b:c";   
+    try{ 
+        var array = StringUtils.split(string, '.'); 
+        if(!(array[0] == 'a:b:c' && array.length == 1)) {
+            throw new Error(array + ": split shouldn't raise an exception with valid string");
+        }
+    }catch(e){
+        throw new Error(array + ": split shouldn't raise an exception with valid string");
+    }
+    
+    string = "a b c";   
+    try{ 
+        var array = StringUtils.split(string, ' '); 
+        if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
+            throw new Error(array + ": split shouldn't raise an exception with valid string");
+        }
+    }catch(e){
+        throw new Error(array + ": split shouldn't raise an exception with valid string");
+    }
+    
+    string = "a b c";   
+    try{ 
+        var array = StringUtils.split(string, ''); 
+        if(!(array[0] == 'a b c' && array.length == 1)) {
+            throw new Error(array + ": split shouldn't raise an exception with valid string");
+        }
+    }catch(e){
+        throw new Error(array + ": split shouldn't raise an exception with valid string");
+    }
+    
+    string = "a b c";   
+    try{ 
+        var array = StringUtils.split(string, null); 
+        if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
+            throw new Error(array + ": split shouldn't raise an exception with valid string");
+        }
+    }catch(e){
+        throw new Error(array + ": split shouldn't raise an exception with valid string");
+    }
+    
+    string = "...a.b.c..";   
+    try{ 
+        var array = StringUtils.split(string, '.'); 
+        if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
+            throw new Error(array + ": split shouldn't raise an exception with valid string");
+        }
+    }catch(e){
+        throw new Error(array + ": split shouldn't raise an exception with valid string");
+    }
+    
 }
