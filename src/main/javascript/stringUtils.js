@@ -206,7 +206,45 @@ StringUtils.prototype = {
           }  
         },
         
+        /** 
+         * Converts a String to upper case as per String.toUpperCase().
+         * A null input String returns null.
+         * An empty input returns empty.
+         * 
+         * By now, it uses String.toUpperCase() from Javascript.
+         * 
+         * @name stringUtils.StringUtils#upperCase
+         * @methodOf stringUtils.StringUtils 
+         * @param {String} string a string object to validate.
+         * @param {String} [msg="Expected a string argument."] message to show if a validation error.
+         */
+        upperCase: function(string) {
+            if(string != NULL_VALUE) {
+                return string.toUpperCase();
+            } else {
+                return NULL_VALUE;
+            }
+        },
         
+        /** 
+         * Converts a String to upper case as per String.toLowerCase().
+         * A null input String returns null.
+         * An empty input returns empty.
+         * 
+         * By now, it uses String.toLowerCase() from Javascript.
+         * 
+         * @name stringUtils.StringUtils#lowerCase
+         * @methodOf stringUtils.StringUtils 
+         * @param {String} string a string object to validate.
+         * @param {String} [msg="Expected a string argument."] message to show if a validation error.
+         */
+        lowerCase: function(string) {
+            if(string != NULL_VALUE) {
+                return string.toLowerCase();
+            } else {
+                return NULL_VALUE;
+            }
+        },
 
         throwError: function(errorMessage){
             throw ErrorValidate.IllegalArgumentError(errorMessage);

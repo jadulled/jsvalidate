@@ -350,3 +350,76 @@ StringUtilsTest.prototype.testSplit = function (){
     }
     
 }
+
+
+/**
+* this function tests StringUtils.UpperCase with different string arguments (null, empty, valid, blank)
+*/
+StringUtilsTest.prototype.testUpperCase = function (){  
+    
+    var string = "aBc";   
+    try{ 
+        var string = StringUtils.upperCase(string); 
+        if(string != "ABC") {
+            throw new Error(array + ": upperCase shouldn't raise an exception with valid string");
+        }
+    }catch(e){
+        throw new Error(array + ": upperCase shouldn't raise an exception with valid string");
+    }
+    
+    string = null;   
+    try{ 
+        var string = StringUtils.upperCase(string); 
+        if(string != null) {
+            throw new Error(array + ": upperCase shouldn't raise an exception with null string");
+        }
+    }catch(e){
+        throw new Error(array + ": upperCase shouldn't raise an exception with null string");
+    }
+    
+    string = "";   
+    try{ 
+        var string = StringUtils.upperCase(string); 
+        if(string != "") {
+            throw new Error(array + ": upperCase shouldn't raise an exception with empty string");
+        }
+    }catch(e){
+        throw new Error(array + ": upperCase shouldn't raise an exception with empty string");
+    }
+}
+
+/**
+* this function tests StringUtils.LowerCase with different string arguments (null, empty, valid, blank)
+*/
+StringUtilsTest.prototype.testLowerCase = function (){  
+    
+    var string = "ABc";   
+    try{ 
+        var string = StringUtils.lowerCase(string); 
+        if(string != "abc") {
+            throw new Error(array + ": lowerCase shouldn't raise an exception with valid string");
+        }
+    }catch(e){
+        throw new Error(array + ": lowerCase shouldn't raise an exception with valid string");
+    }
+    
+    string = null;   
+    try{ 
+        var string = StringUtils.lowerCase(string); 
+        if(string != null) {
+            throw new Error(array + ": lowerCase shouldn't raise an exception with null string");
+        }
+    }catch(e){
+        throw new Error(array + ": lowerCase shouldn't raise an exception with null string");
+    }
+    
+    string = "";   
+    try{ 
+        var string = StringUtils.lowerCase(string); 
+        if(string != "") {
+            throw new Error(array + ": lowerCase shouldn't raise an exception with empty string");
+        }
+    }catch(e){
+        throw new Error(array + ": lowerCase shouldn't raise an exception with empty string");
+    }
+}
