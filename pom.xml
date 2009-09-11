@@ -10,7 +10,7 @@
   <groupId>ar.com.zauber.javascript.validate</groupId>
   <artifactId>validate</artifactId>
   <packaging>jar</packaging>
-  <version>0.3-SNAPSHOT</version>
+  <version>0.4-SNAPSHOT</version>
   <name>Validation Utils</name>
 
 
@@ -89,7 +89,7 @@
     <dependency>
       <groupId>ar.com.zauber.commons.test</groupId>
       <artifactId>commons-test-javascript</artifactId>
-      <version>3.16</version>
+      <version>3.17</version>
     </dependency>
   </dependencies>
   
