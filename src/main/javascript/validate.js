@@ -167,6 +167,7 @@ Validate.prototype = {
     
 
     /** 
+     * @deprecated
      * Validate an argument, throwing IllegarArgumentError if the string is empty.
      * Optionally it takes a message string argument for the error message. 
      *
@@ -181,6 +182,7 @@ Validate.prototype = {
     },
     
     /** 
+     * @deprecated
      * Validate an argument, throwing IllegarArgumentError if the string is blank.
      * Optionally it takes a message string argument for the error message. 
      *
@@ -300,6 +302,21 @@ Validate.prototype = {
     }
 }
 
+/** 
+ * @deprecated
+ * IllegalArgumentError object constructor 
+ * @name validate.IllegalArgumentError
+ * @class The error throwed by validation methods.
+ * @memberOf validate 
+ * @param {String} errorMessage the error message to show.
+ */
+var IllegalArgumentError = function(errorMessage){
+    var error = new Error(errorMessage);
+    error.name = "IllegalArgumentError";
+    return error;
+};
+
+
 var Type = function(){};
 var Method = function(){};
 var Attribute = function(){};
@@ -312,6 +329,7 @@ Attribute.prototype = {};
 
 // "Export" Validate class
 validate.Validate = new Validate();
+validate.IllegalArgumentError = IllegalArgumentError;
 
 })();
 

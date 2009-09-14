@@ -16,7 +16,8 @@ ValidateTest.prototype = new TestCase();
 
 //"import" validate class
 Validate = validate.Validate;
-
+//"import" validate class
+IllegalArgumentError = validate.IllegalArgumentError;
 
 /** 
  * this function tests Validate.notNull with many valid values and a null value 
@@ -394,6 +395,20 @@ ValidateTest.prototype.testIsNotBlankString = function (){
         throw new Error("isNotBlankString shouldn't raise an exception with defined not blank string");
     }
 }
+
+
+/**
+* this function tests Validate.IllegalArgumentError  
+* */
+ValidateTest.prototype.testIllegalArgumentError = function (){  
+
+    try {
+        var error = new IllegalArgumentError("bla");
+    } catch (err) {
+        throw new Error( err + "IllegalArgumentError shouldn't raise an exception");
+    }
+}
+
 
 /**
 * this function tests Validate.isNonEmptyString with different string arguments (null, empty, valid, blank) 
