@@ -10,7 +10,7 @@
   <groupId>ar.com.zauber.javascript.validate</groupId>
   <artifactId>validate</artifactId>
   <packaging>jar</packaging>
-  <version>0.4-SNAPSHOT</version>
+  <version>0.3.1</version>
   <name>Validation Utils</name>
 
 
