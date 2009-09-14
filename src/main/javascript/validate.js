@@ -132,7 +132,7 @@ Validate.prototype = {
      * @param {String} [msg="Expected a number argument."] message to show if a validation error.
      */
     isNumber: function(number, msg){
-	    this.isType(string, 'number', msg || 'Expected number argument');
+	    this.isType(number, 'number', msg || 'Expected number argument');
     },
 
     /** 

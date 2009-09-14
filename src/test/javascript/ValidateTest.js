@@ -99,6 +99,55 @@ ValidateTest.prototype.testIsDefined = function(){
 }
 
 /**
+* this function tests Validate.isNumber.
+*/
+ValidateTest.prototype.testIsNumber = function testIsNumber(){
+    var n = 1;
+    try{
+        Validate.isNumber(n);
+    }catch(e){
+        throw new Error("isNumber shouldn't raise an exception with function arguments.");
+    }
+    
+    var n = null;
+    try{
+        Validate.isNumber(n);
+        throw new Error("isNumber should raise an exception with function arguments.");
+    }catch(e){}
+    
+    var n = 'abs';
+    try{
+        Validate.isNumber(n);
+        throw new Error("isNumber should raise an exception with function arguments.");
+    }catch(e){}
+}
+
+/**
+* this function tests Validate.isString.
+*/
+ValidateTest.prototype.testIsString = function testIsString(){
+    var n = 1;
+    try{
+        Validate.isString(n);
+        throw new Error("isString should raise an exception with function arguments.");
+    }catch(e){}
+    
+    var n = null;
+    try{
+        Validate.isString(n);
+        throw new Error("isString should raise an exception with function arguments.");
+    }catch(e){}
+    
+    var n = 'abs';
+    try{
+        Validate.isString(n);
+        
+    }catch(e){
+        throw new Error("isString shouldn't raise an exception with function arguments.");       
+    }
+}
+
+/**
 * this function tests Validate.isFunction.
 */
 ValidateTest.prototype.testIsFunction = function testIsFunction(){
