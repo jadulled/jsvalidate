@@ -8,418 +8,343 @@
  
 
 /** Test stringUtils.js */
-function StringUtilsTest(name)
-{
-    TestCase.call( this, name );
-}
-
-StringUtilsTest.prototype = new TestCase();
-
-//"import" stringUtils class
-StringUtils = stringUtils.StringUtils;
-
-
-/**
-* this function tests StringUtils.isNotBlank with a different string arguments (null, empty, valid)
-*/
-StringUtilsTest.prototype.testIsNotBlank = function (){  
-
-    var string = "lalala";   
-    try{ 
-        StringUtils.isNotBlank(string); 
-    }catch(e){
-        throw new Error("isNotBlank shouldn't raise an exception with defined not blank string");
+    function StringUtilsTest(name)
+    {
+        TestCase.call( this, name );
     }
     
-    string = "";   
-    try{ 
-        StringUtils.isNotBlank(string);
-        throw new Error("isNotBlank should raise an exception with defined empty string");   
-    }catch(e){}
+    StringUtilsTest.prototype = new TestCase();
     
-    string = null;   
-    try{ 
-        StringUtils.isNotBlank(string);
-        throw new Error("isNotBlank should raise an exception with not defined string");   
-    }catch(e){}
-    
-    string = " ";   
-    try{ 
-        StringUtils.isNotBlank(string);
-        throw new Error("isNotBlank should raise an exception with blank string");   
-    }catch(e){}
-    
-    string = "            ";   
-    try{ 
-        StringUtils.isNotBlank(string);
-        throw new Error("isNotBlank should raise an exception with blank string");   
-    }catch(e){}
-    
-    string = "    abc    ";   
-    try{ 
-        StringUtils.isNotBlank(string);
-    }catch(e){
-        throw new Error("isNotBlank shouldn't raise an exception with defined not blank string");
-    }
-}
+    //"import" stringUtils class
+    StringUtils = stringUtils.StringUtils;
 
-/**
-* this function tests StringUtils.isNonEmpty with different string arguments (null, empty, valid, blank)
-*/
-StringUtilsTest.prototype.testIsNonEmpty = function (){  
+    StringUtilsTest.prototype.MSG_ABBREVIATE = ": abbreviate should not raise an exception";
+    StringUtilsTest.prototype.MSG_LOWERCASE = ": lowerCase should not raise an exception";
+    StringUtilsTest.prototype.MSG_UPPERCASE = ": upperCase should not raise an exception";
+    StringUtilsTest.prototype.MSG_ISNOTBLANK_C = ": isNotBlank should not raise an exception";
+    StringUtilsTest.prototype.MSG_ISNOTBLANK_I = ": isNotBlank should raise an exception";
+    StringUtilsTest.prototype.MSG_STRIP = ": strip should not raise an exception";
+    StringUtilsTest.prototype.MSG_JOIN = ": join should not raise an exception";
+    
+    /**
+    * this function tests StringUtils.isNotBlank with a different string arguments (null, empty, valid)
+    */
+    StringUtilsTest.prototype.testIsNotBlank = function (){  
 
-    var string = "lalala";   
-    try{ 
-        StringUtils.isNonEmpty(string); 
-    }catch(e){
-        throw new Error("isNonEmpty shouldn't raise an exception with defined not empty string");
+        this.isNotBlankCorrect("lalala", this.MSG_ISNOTBLANK_C + " with defined not blank string");
+        
+        this.isNotBlankIncorrect("", this.MSG_ISNOTBLANK_I + " with defined empty string");
+        
+        this.isNotBlankIncorrect(null, this.MSG_ISNOTBLANK_I + " with not defined string");
+        
+        this.isNotBlankIncorrect(" ", this.MSG_ISNOTBLANK_I + " with blank string"); 
+        
+        this.isNotBlankIncorrect("            ", this.MSG_ISNOTBLANK_I + " with blank string");
+        
+        this.isNotBlankCorrect("    abc    ", this.MSG_ISNOTBLANK_C + " with defined not blank string");
     }
     
-    string = "";   
-    try{ 
-        StringUtils.isNonEmpty(string);
-        throw new Error("isNonEmpty should raise an exception with defined empty string");   
-    }catch(e){}
-    
-    string = null;   
-    try{ 
-        StringUtils.isNonEmpty(string);
-        throw new Error("isNonEmpty should raise an exception with not defined string");   
-    }catch(e){}
-    
-    string = " ";   
-    try{
-        StringUtils.isNonEmpty(string);
-    }catch(e){
-         throw new Error("isNonEmpty shouldn't raise an exception with defined not empty string");       
-    }
-}
-
-
-/**
-* this function tests StringUtils.strip with different string arguments (null, empty, valid, blank)
-*/
-StringUtilsTest.prototype.testStrip = function (){  
-
-    var string = "lalala";   
-    try{ 
-        var stringStripped = StringUtils.strip(string); 
-        if(stringStripped != "lalala") {
-            throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");
+    StringUtilsTest.prototype.isNotBlankCorrect = function (string, msg){ 
+        try{ 
+            StringUtils.isNotBlank(string);
+        }catch(e){
+            throw new Error(msg ? msg : this.MSG_ISNOTBLANK_C);
         }
-    }catch(e){
-        throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");
     }
     
-    string = "";   
-    try{ 
-        var stringStripped = StringUtils.strip(string); 
-        if(stringStripped != "") {
-            throw new Error(stringStripped + ": strip shouldn't raise an exception with defined empty string");
-        }
-    }catch(e){
-        throw new Error(stringStripped + ": strip shouldn't raise an exception with defined empty string");
+    StringUtilsTest.prototype.isNotBlankIncorrect = function (string, msg){ 
+        try{ 
+            StringUtils.isNotBlank(string);
+            throw new Error(msg ? msg : this.MSG_ISNOTBLANK_I);   
+        }catch(e){}
     }
     
-    string = null;   
-    try{ 
-        var stringStripped = StringUtils.strip(string);
-        if(stringStripped != null) {
-            throw new Error(stringStripped + ": strip shouldn't raise an exception with not defined string");  
+    /**
+    * this function tests StringUtils.isNonEmpty with different string arguments (null, empty, valid, blank)
+    */
+    StringUtilsTest.prototype.testIsNonEmpty = function (){  
+    
+        var string = "lalala";   
+        try{ 
+            StringUtils.isNonEmpty(string); 
+        }catch(e){
+            throw new Error("isNonEmpty shouldn't raise an exception with defined not empty string");
         }
-    }catch(e){
-        throw new Error(stringStripped + ": strip shouldn't raise an exception with not defined string");        
+        
+        string = "";   
+        try{ 
+            StringUtils.isNonEmpty(string);
+            throw new Error("isNonEmpty should raise an exception with defined empty string");   
+        }catch(e){}
+        
+        string = null;   
+        try{ 
+            StringUtils.isNonEmpty(string);
+            throw new Error("isNonEmpty should raise an exception with not defined string");   
+        }catch(e){}
+        
+        string = " ";   
+        try{
+            StringUtils.isNonEmpty(string);
+        }catch(e){
+             throw new Error("isNonEmpty shouldn't raise an exception with defined not empty string");       
+        }
     }
     
-    string = "   a a ";   
-    try{
-        var stringStripped = StringUtils.strip(string); 
-        if(stringStripped != "a a") {
-            throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");
-        }
-    }catch(e){
-         throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");       
-    }
-
-    string = "   a  a   a     ";   
-    try{
-        var stringStripped = StringUtils.strip(string); 
-        if(stringStripped != "a  a   a") {
-            throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");
-        }
-    }catch(e){
-         throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");       
+    
+    /**
+    * this function tests StringUtils.strip with different string arguments (null, empty, valid, blank)
+    */
+    StringUtilsTest.prototype.testStrip = function (){  
+    
+        this.strip("lalala", "lalala");
+        
+        this.strip("", "");
+        
+        this.strip(null, null);
+        
+        this.strip("   a a ", "a a");
+    
+        this.strip("   a  a   a     ", "a  a   a");       
+        
+        this.strip("    ", "");
+        
     }
     
-    string = "    ";   
-    try{
-        var stringStripped = StringUtils.strip(string); 
-        if(stringStripped != "") {
-            throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");
+    StringUtilsTest.prototype.strip = function (string, expected){ 
+        try{ 
+            var stringStripped = StringUtils.strip(string); 
+            if(stringStripped != expected) {
+                throw new Error(string + this.MSG_STRIP);
+            }
+        }catch(e){
+            throw new Error(string + this.MSG_STRIP);
         }
-    }catch(e){
-         throw new Error(stringStripped + ": strip shouldn't raise an exception with defined not empty string");       
     }
-}
-
-/**
-* this function tests StringUtils.join with different string arguments (null, empty, valid, blank)
-*/
-StringUtilsTest.prototype.testJoin = function (){  
+    /**
+    * this function tests StringUtils.join with different string arguments (null, empty, valid, blank)
+    */
+    StringUtilsTest.prototype.testJoin = function (){  
+        
+        this.join(null, '*', null);
+        
+        this.join(new Array(), '*', "");
+                
+        var array = new Array();
+        array.push(null);
+        this.join(array, '*', "");
+           
+        array = new Array();
+        array.push('a');
+        array.push('b');
+        array.push('c');
+        this.join(array, ';', "a;b;c");
+        
+        this.join(array, null, "abc");
+        
+        this.join(array, '', "abc");
+        
+        this.join(array, '--', "a--b--c");
+                
+        array = new Array();
+        array.push(null);
+        array.push('');
+        array.push('c');
+        
+        this.join(array, ';', ";;c");
+        
+    }
     
-    var array = null;   
-    try{ 
-        var string = StringUtils.join(array, '*'); 
-        if(string != null) {
-            throw new Error(string + ": join shouldn't raise an exception with null array");
+    StringUtilsTest.prototype.join = function (array, separator, expected){  
+        try{ 
+            var string = StringUtils.join(array, separator); 
+            if(string != expected) {
+                throw new Error(array + this.MSG_JOIN);
+            }
+        }catch(e){
+            throw new Error(array + this.MSG_JOIN);
         }
-    }catch(e){
-        throw new Error(string + ": join shouldn't raise an exception with null array");
+    }
+    /**
+    * this function tests StringUtils.split with different string arguments (null, empty, valid, blank)
+    */
+    StringUtilsTest.prototype.testSplit = function (){  
+    
+        
+        var string = null;   
+        try{ 
+            var array = StringUtils.split(string, '*'); 
+            if(array != null) {
+                throw new Error(array + ": split shouldn't raise an exception with null string");
+            }
+        }catch(e){
+            throw new Error(string + ": split shouldn't raise an exception with null string");
+        }
+        
+        string = "";   
+        try{ 
+            var array = StringUtils.split(string, '*'); 
+            if(array.length != 0) {
+                throw new Error(array + ": split shouldn't raise an exception with empty string");
+            }
+        }catch(e){
+            throw new Error(string + ": split shouldn't raise an exception with empty string");
+        }
+        
+        string = "a.b.c";   
+        try{ 
+            var array = StringUtils.split(string, '.'); 
+            if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c')) {
+                throw new Error(array + ": split shouldn't raise an exception with valid string");
+            }
+        }catch(e){
+            throw new Error(string + ": split shouldn't raise an exception with valid string");
+        }
+        
+        string = "a...b.c";   
+        try{ 
+            var array = StringUtils.split(string, '.'); 
+            if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
+                throw new Error(array + ": split shouldn't raise an exception with valid string");
+            }
+        }catch(e){
+            throw new Error(string + ": split shouldn't raise an exception with valid string");
+        }
+        
+        string = "a:b:c";   
+        try{ 
+            var array = StringUtils.split(string, '.'); 
+            if(!(array[0] == 'a:b:c' && array.length == 1)) {
+                throw new Error(array + ": split shouldn't raise an exception with valid string");
+            }
+        }catch(e){
+            throw new Error(string + ": split shouldn't raise an exception with valid string");
+        }
+        
+        string = "a b c";   
+        try{ 
+            var array = StringUtils.split(string, ' '); 
+            if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
+                throw new Error(array + ": split shouldn't raise an exception with valid string");
+            }
+        }catch(e){
+            throw new Error(string + ": split shouldn't raise an exception with valid string");
+        }
+        
+        string = "a b c";   
+        try{ 
+            var array = StringUtils.split(string, ''); 
+            if(!(array[0] == 'a b c' && array.length == 1)) {
+                throw new Error(array + ": split shouldn't raise an exception with valid string");
+            }
+        }catch(e){
+            throw new Error(string + ": split shouldn't raise an exception with valid string");
+        }
+        
+        string = "a b c";   
+        try{ 
+            var array = StringUtils.split(string, null); 
+            if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
+                throw new Error(array + ": split shouldn't raise an exception with valid string");
+            }
+        }catch(e){
+            throw new Error(string + ": split shouldn't raise an exception with valid string");
+        }
+        
+        string = "...a.b.c..";   
+        try{ 
+            var array = StringUtils.split(string, '.'); 
+            if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
+                throw new Error(array + ": split shouldn't raise an exception with valid string");
+            }
+        }catch(e){
+            throw new Error(string + ": split shouldn't raise an exception with valid string");
+        }
+        
     }
     
-    array = new Array();   
-    try{ 
-        var string = StringUtils.join(array, '*'); 
-        if(string != "") {
-            throw new Error(string + ": join shouldn't raise an exception with empty array");
-        }
-    }catch(e){
-        throw new Error(string + ": join shouldn't raise an exception with empty array");
-    }
     
-    array = new Array();
-    array.push(null);
-    try{ 
-        var string = StringUtils.join(array, '*');
-        if(string != "") {
-            throw new Error(string + ": join shouldn't raise an exception with null array elements");  
-        }
-    }catch(e){
-        throw new Error(string + ": join shouldn't raise an exception with null array elements");        
-    }
+    /**
+    * this function tests StringUtils.UpperCase with different string arguments (null, empty, valid, blank)
+    */
+    StringUtilsTest.prototype.testUpperCase = function (){  
+        
+        this.upperCase("aBc", "ABC");
+        
+        this.upperCase(null, null);
+        
+        this.upperCase("", "");
        
-    array = new Array();
-    array.push('a');
-    array.push('b');
-    array.push('c');
-    try{
-        var string = StringUtils.join(array, ';'); 
-        if(string != "a;b;c") {
-            throw new Error(string + ": join shouldn't raise an exception with defined array elements");
-        }
-    }catch(e){
-         throw new Error(string + ": join shouldn't raise an exception with defined array elements");       
     }
     
-    try{
-        var string = StringUtils.join(array, null); 
-        if(string != "abc") {
-            throw new Error(string + ": join shouldn't raise an exception with defined array elements");
-        }
-    }catch(e){
-         throw new Error(string + ": join shouldn't raise an exception with defined array elements");       
-    }
-    
-    try{
-        var string = StringUtils.join(array, ''); 
-        if(string != "abc") {
-            throw new Error(string + ": join shouldn't raise an exception with defined array elements");
-        }
-    }catch(e){
-         throw new Error(string + ": join shouldn't raise an exception with defined array elements");       
-    }
-    
-    try{
-        var string = StringUtils.join(array, '--'); 
-        if(string != "a--b--c") {
-            throw new Error(string + ": join shouldn't raise an exception with defined array elements");
-        }
-    }catch(e){
-         throw new Error(string + ": join shouldn't raise an exception with defined array elements");       
-    }
-    
-    array = new Array();
-    array.push(null);
-    array.push('');
-    array.push('c');
-    try{
-        var string = StringUtils.join(array, ';'); 
-        if(string != ";;c") {
-            throw new Error(string + ": join shouldn't raise an exception with defined array elements");
-        }
-    }catch(e){
-         throw new Error(string + ": join shouldn't raise an exception with defined array elements");       
+
+    StringUtilsTest.prototype.upperCase = function (string, expected){
+        try{ 
+            var ret = StringUtils.upperCase(string); 
+            if(ret != expected) {
+                throw new Error(string + this.MSG_UPPERCASE);
+            }
+        }catch(e){
+            throw new Error(string + this.MSG_UPPERCASE);
+        }        
     }
 
-}
+    /**
+    * this function tests StringUtils.LowerCase with different string arguments (null, empty, valid, blank)
+    */
+    StringUtilsTest.prototype.testLowerCase = function (){  
+        this.lowerCase("ABc", "abc");
+        
+        this.lowerCase(null, null);
+        
+        this.lowerCase("", "");
+    }
+    
 
-/**
-* this function tests StringUtils.split with different string arguments (null, empty, valid, blank)
-*/
-StringUtilsTest.prototype.testSplit = function (){  
+    StringUtilsTest.prototype.lowerCase = function (string, expected){
+        try{ 
+            var ret = StringUtils.lowerCase(string); 
+            if(ret != expected) {
+                throw new Error(string + this.MSG_LOWERCASE);
+            }
+        }catch(e){
+            throw new Error(string + this.MSG_LOWERCASE);
+        }        
+    }
+    
+    /**
+    * this function tests StringUtils.Abbreviate with different string arguments (null, empty, valid, blank)
+    */
+    StringUtilsTest.prototype.testAbbreviate = function (){
+       
+        this.abbreviate("abcdefg", 4, "a...");   
+        
+        this.abbreviate("abcdefg", 7, "abcdefg");   
+                
+        this.abbreviate("abcdefg", 8, "abcdefg");   
+        
+        this.abbreviate("abcdefg", 6, "abc...");   
+        
+        this.abbreviate(null, 1, null);   
+        
+        string = "abc";   
+        try { 
+            var string = StringUtils.abbreviate(string, 2); 
+            throw new Error(string + this.MSG_ABBREVIATE + " with invalid maxWidth");
+        } catch(e) {}
+        
+        this.abbreviate("", 1, "");   
+        
+        this.abbreviate("      ", 1, "");   
+    }
 
-    
-    var string = null;   
-    try{ 
-        var array = StringUtils.split(string, '*'); 
-        if(array != null) {
-            throw new Error(array + ": split shouldn't raise an exception with null string");
+    StringUtilsTest.prototype.abbreviate = function (string, maxWidth, expected){
+        try{ 
+            var ret = StringUtils.abbreviate(string, maxWidth); 
+            if(ret != expected) {
+                throw new Error(string + this.MSG_ABBREVIATE);
+            }
+        }catch(e){
+            throw new Error(string + this.MSG_ABBREVIATE);
         }
-    }catch(e){
-        throw new Error(array + ": split shouldn't raise an exception with null string");
     }
-    
-    string = "";   
-    try{ 
-        var array = StringUtils.split(string, '*'); 
-        if(array.length != 0) {
-            throw new Error(array + ": split shouldn't raise an exception with empty string");
-        }
-    }catch(e){
-        throw new Error(array + ": split shouldn't raise an exception with empty string");
-    }
-    
-    string = "a.b.c";   
-    try{ 
-        var array = StringUtils.split(string, '.'); 
-        if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c')) {
-            throw new Error(array + ": split shouldn't raise an exception with valid string");
-        }
-    }catch(e){
-        throw new Error(array + ": split shouldn't raise an exception with valid string");
-    }
-    
-    string = "a...b.c";   
-    try{ 
-        var array = StringUtils.split(string, '.'); 
-        if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
-            throw new Error(array + ": split shouldn't raise an exception with valid string");
-        }
-    }catch(e){
-        throw new Error(array + ": split shouldn't raise an exception with valid string");
-    }
-    
-    string = "a:b:c";   
-    try{ 
-        var array = StringUtils.split(string, '.'); 
-        if(!(array[0] == 'a:b:c' && array.length == 1)) {
-            throw new Error(array + ": split shouldn't raise an exception with valid string");
-        }
-    }catch(e){
-        throw new Error(array + ": split shouldn't raise an exception with valid string");
-    }
-    
-    string = "a b c";   
-    try{ 
-        var array = StringUtils.split(string, ' '); 
-        if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
-            throw new Error(array + ": split shouldn't raise an exception with valid string");
-        }
-    }catch(e){
-        throw new Error(array + ": split shouldn't raise an exception with valid string");
-    }
-    
-    string = "a b c";   
-    try{ 
-        var array = StringUtils.split(string, ''); 
-        if(!(array[0] == 'a b c' && array.length == 1)) {
-            throw new Error(array + ": split shouldn't raise an exception with valid string");
-        }
-    }catch(e){
-        throw new Error(array + ": split shouldn't raise an exception with valid string");
-    }
-    
-    string = "a b c";   
-    try{ 
-        var array = StringUtils.split(string, null); 
-        if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
-            throw new Error(array + ": split shouldn't raise an exception with valid string");
-        }
-    }catch(e){
-        throw new Error(array + ": split shouldn't raise an exception with valid string");
-    }
-    
-    string = "...a.b.c..";   
-    try{ 
-        var array = StringUtils.split(string, '.'); 
-        if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
-            throw new Error(array + ": split shouldn't raise an exception with valid string");
-        }
-    }catch(e){
-        throw new Error(array + ": split shouldn't raise an exception with valid string");
-    }
-    
-}
-
-
-/**
-* this function tests StringUtils.UpperCase with different string arguments (null, empty, valid, blank)
-*/
-StringUtilsTest.prototype.testUpperCase = function (){  
-    
-    var string = "aBc";   
-    try{ 
-        var string = StringUtils.upperCase(string); 
-        if(string != "ABC") {
-            throw new Error(array + ": upperCase shouldn't raise an exception with valid string");
-        }
-    }catch(e){
-        throw new Error(array + ": upperCase shouldn't raise an exception with valid string");
-    }
-    
-    string = null;   
-    try{ 
-        var string = StringUtils.upperCase(string); 
-        if(string != null) {
-            throw new Error(array + ": upperCase shouldn't raise an exception with null string");
-        }
-    }catch(e){
-        throw new Error(array + ": upperCase shouldn't raise an exception with null string");
-    }
-    
-    string = "";   
-    try{ 
-        var string = StringUtils.upperCase(string); 
-        if(string != "") {
-            throw new Error(array + ": upperCase shouldn't raise an exception with empty string");
-        }
-    }catch(e){
-        throw new Error(array + ": upperCase shouldn't raise an exception with empty string");
-    }
-}
-
-/**
-* this function tests StringUtils.LowerCase with different string arguments (null, empty, valid, blank)
-*/
-StringUtilsTest.prototype.testLowerCase = function (){  
-    
-    var string = "ABc";   
-    try{ 
-        var string = StringUtils.lowerCase(string); 
-        if(string != "abc") {
-            throw new Error(array + ": lowerCase shouldn't raise an exception with valid string");
-        }
-    }catch(e){
-        throw new Error(array + ": lowerCase shouldn't raise an exception with valid string");
-    }
-    
-    string = null;   
-    try{ 
-        var string = StringUtils.lowerCase(string); 
-        if(string != null) {
-            throw new Error(array + ": lowerCase shouldn't raise an exception with null string");
-        }
-    }catch(e){
-        throw new Error(array + ": lowerCase shouldn't raise an exception with null string");
-    }
-    
-    string = "";   
-    try{ 
-        var string = StringUtils.lowerCase(string); 
-        if(string != "") {
-            throw new Error(array + ": lowerCase shouldn't raise an exception with empty string");
-        }
-    }catch(e){
-        throw new Error(array + ": lowerCase shouldn't raise an exception with empty string");
-    }
-}

@@ -100,9 +100,11 @@ StringUtils.prototype = {
          * @name stringUtils.StringUtils#strip
          * @methodOf stringUtils.StringUtils
          * @param {String} string a string object to validate.
-         * @param {String} [msg="Expected a string argument."] message to show if a validation error.
          */
         strip: function(string){
+            
+            var ret = NULL_VALUE;
+            
             if(string != NULL_VALUE) {
                 if(string.length > 0) {
                     var stringO = string;
@@ -123,13 +125,12 @@ StringUtils.prototype = {
                           foundFirst = true;
                       }
                     }                    
-                    return stringNew;
+                    ret = stringNew;
                 } else {
-                    return "";
+                    ret = "";
                 }
-            } else {
-                return NULL_VALUE;
             }
+            return ret;
         },
         
         /** 
@@ -143,9 +144,9 @@ StringUtils.prototype = {
          * @name stringUtils.StringUtils#join
          * @methodOf stringUtils.StringUtils 
          * @param {Array} array an array object to validate.
-         * @param {String} [msg="Expected a string argument."] message to show if a validation error.
          */
         join: function(array, separator){
+            var ret = NULL_VALUE;
             if(array != NULL_VALUE) {
                   var string = "";
                   for(var i = 0; i < array.length; i++) {
@@ -156,10 +157,9 @@ StringUtils.prototype = {
                                   string = string + separator;
                           }
                   }
-                  return string;
-            } else {
-                return NULL_VALUE;
+                  ret = string;
             }
+            return ret;
         },
         
         /** 
@@ -177,9 +177,10 @@ StringUtils.prototype = {
          * @name stringUtils.StringUtils#split
          * @methodOf stringUtils.StringUtils 
          * @param {String} string a string object to validate.
-         * @param {String} [msg="Expected a string argument."] message to show if a validation error.
          */
         split: function(string, separator) {
+            
+            var ret = NULL_VALUE;
             
             var separatorUsed = separator;
             if(separator === NULL_VALUE) {
@@ -200,10 +201,9 @@ StringUtils.prototype = {
                                 j++;
                         }
                 }
-                return array;
-          } else {
-              return NULL_VALUE;
-          }  
+                ret = array;
+          }
+          return ret; 
         },
         
         /** 
@@ -216,7 +216,6 @@ StringUtils.prototype = {
          * @name stringUtils.StringUtils#upperCase
          * @methodOf stringUtils.StringUtils 
          * @param {String} string a string object to validate.
-         * @param {String} [msg="Expected a string argument."] message to show if a validation error.
          */
         upperCase: function(string) {
             if(string != NULL_VALUE) {
@@ -236,7 +235,6 @@ StringUtils.prototype = {
          * @name stringUtils.StringUtils#lowerCase
          * @methodOf stringUtils.StringUtils 
          * @param {String} string a string object to validate.
-         * @param {String} [msg="Expected a string argument."] message to show if a validation error.
          */
         lowerCase: function(string) {
             if(string != NULL_VALUE) {
@@ -244,6 +242,46 @@ StringUtils.prototype = {
             } else {
                 return NULL_VALUE;
             }
+        },
+        
+        
+        /**
+         * Abbreviates a String using ellipses. 
+         * This will turn "Now is the time for all good men" 
+         * into "Now is the time for...".
+         * 
+         * Returns null if the string is null
+         * Returns empty string if the string is empty.
+         * Returns IllegalArgumentException if the maxWidth is lower than 4
+         * 
+         * @name stringUtils.StringUtils#abbreviates
+         * @methodOf stringUtils.StringUtils
+         * @param {String} string to abbreviate
+         * @param maxWidth the maximum length of the abbreviated string. 
+         * Must be at leate 4
+         */
+        abbreviate: function(string, maxWidth) {
+            var ret = NULL_VALUE;
+            if(string != NULL_VALUE) {
+                if(string.length > 0 && this.strip(string).length != 0) {
+                    if(maxWidth < string.length && maxWidth > 3) {
+                        var j = 0;
+                        var newString = "";
+                        for(var i = 0; i < maxWidth - 3; i++) {
+                            newString = newString + string[i];
+                        }
+                        newString = newString + "...";
+                        ret = newString;
+                    } else if(maxWidth >= string.length){
+                        ret = string;
+                    } else {
+                        this.throwError("Expected maxWidth greater than 3");
+                    }
+                } else {
+                    ret = "";
+                }
+            }
+            return ret;
         },
 
         throwError: function(errorMessage){
