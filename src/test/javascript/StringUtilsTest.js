@@ -25,6 +25,10 @@
     StringUtilsTest.prototype.MSG_ISNOTBLANK_I = ": isNotBlank should raise an exception";
     StringUtilsTest.prototype.MSG_STRIP = ": strip should not raise an exception";
     StringUtilsTest.prototype.MSG_JOIN = ": join should not raise an exception";
+    StringUtilsTest.prototype.MSG_ISNONEMPTY_C= ": isNonEmpty should raise an exception";
+    StringUtilsTest.prototype.MSG_ISNONEMPTY_I= ": isNonEmpty should not raise an exception";
+    StringUtilsTest.prototype.MSG_SPLIT= ": split should not raise an exception";
+    StringUtilsTest.prototype.MSG_SPLIT_VALID= ": split should not raise an exception with valid string";
     
     /**
     * this function tests StringUtils.isNotBlank with a different string arguments (null, empty, valid)
@@ -68,26 +72,26 @@
         try{ 
             StringUtils.isNonEmpty(string); 
         }catch(e){
-            throw new Error("isNonEmpty shouldn't raise an exception with defined not empty string");
+            throw new Error(this.MSG_ISNONEMPTY_I + " with defined not empty string");
         }
         
         string = "";   
         try{ 
             StringUtils.isNonEmpty(string);
-            throw new Error("isNonEmpty should raise an exception with defined empty string");   
+            throw new Error(this.MSG_ISNONEMPTY_C + " with defined empty string");   
         }catch(e){}
         
         string = null;   
         try{ 
             StringUtils.isNonEmpty(string);
-            throw new Error("isNonEmpty should raise an exception with not defined string");   
+            throw new Error(this.MSG_ISNONEMPTY_C + " with not defined string");   
         }catch(e){}
         
         string = " ";   
         try{
             StringUtils.isNonEmpty(string);
         }catch(e){
-             throw new Error("isNonEmpty shouldn't raise an exception with defined not empty string");       
+             throw new Error(this.MSG_ISNONEMPTY_I + " with defined not empty string");       
         }
     }
     
@@ -175,90 +179,90 @@
         try{ 
             var array = StringUtils.split(string, '*'); 
             if(array != null) {
-                throw new Error(array + ": split shouldn't raise an exception with null string");
+                throw new Error(array + this.MSG_SPLIT + " with null string");
             }
         }catch(e){
-            throw new Error(string + ": split shouldn't raise an exception with null string");
+            throw new Error(string + this.MSG_SPLIT + " with null string");
         }
         
         string = "";   
         try{ 
             var array = StringUtils.split(string, '*'); 
             if(array.length != 0) {
-                throw new Error(array + ": split shouldn't raise an exception with empty string");
+                throw new Error(array + + this.MSG_SPLIT + " with empty string");
             }
         }catch(e){
-            throw new Error(string + ": split shouldn't raise an exception with empty string");
+            throw new Error(string + + this.MSG_SPLIT + " with empty string");
         }
         
         string = "a.b.c";   
         try{ 
             var array = StringUtils.split(string, '.'); 
             if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c')) {
-                throw new Error(array + ": split shouldn't raise an exception with valid string");
+                throw new Error(array + this.MSG_SPLIT_VALID);
             }
         }catch(e){
-            throw new Error(string + ": split shouldn't raise an exception with valid string");
+            throw new Error(string + this.MSG_SPLIT_VALID);
         }
         
         string = "a...b.c";   
         try{ 
             var array = StringUtils.split(string, '.'); 
             if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
-                throw new Error(array + ": split shouldn't raise an exception with valid string");
+                throw new Error(array + this.MSG_SPLIT_VALID);
             }
         }catch(e){
-            throw new Error(string + ": split shouldn't raise an exception with valid string");
+            throw new Error(string + this.MSG_SPLIT_VALID);
         }
         
         string = "a:b:c";   
         try{ 
             var array = StringUtils.split(string, '.'); 
             if(!(array[0] == 'a:b:c' && array.length == 1)) {
-                throw new Error(array + ": split shouldn't raise an exception with valid string");
+                throw new Error(array + this.MSG_SPLIT_VALID);
             }
         }catch(e){
-            throw new Error(string + ": split shouldn't raise an exception with valid string");
+            throw new Error(string + this.MSG_SPLIT_VALID);
         }
         
         string = "a b c";   
         try{ 
             var array = StringUtils.split(string, ' '); 
             if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
-                throw new Error(array + ": split shouldn't raise an exception with valid string");
+                throw new Error(array + this.MSG_SPLIT_VALID);
             }
         }catch(e){
-            throw new Error(string + ": split shouldn't raise an exception with valid string");
+            throw new Error(string + this.MSG_SPLIT_VALID);
         }
         
         string = "a b c";   
         try{ 
             var array = StringUtils.split(string, ''); 
             if(!(array[0] == 'a b c' && array.length == 1)) {
-                throw new Error(array + ": split shouldn't raise an exception with valid string");
+                throw new Error(array + this.MSG_SPLIT_VALID);
             }
         }catch(e){
-            throw new Error(string + ": split shouldn't raise an exception with valid string");
+            throw new Error(string + this.MSG_SPLIT_VALID);
         }
         
         string = "a b c";   
         try{ 
             var array = StringUtils.split(string, null); 
             if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
-                throw new Error(array + ": split shouldn't raise an exception with valid string");
+                throw new Error(array + this.MSG_SPLIT_VALID);
             }
         }catch(e){
-            throw new Error(string + ": split shouldn't raise an exception with valid string");
+            throw new Error(string + this.MSG_SPLIT_VALID);
         }
         
         string = "...a.b.c..";   
         try{ 
             var array = StringUtils.split(string, '.'); 
             if(!(array[0] == 'a' && array[1] == 'b' && array[2] == 'c' && array.length == 3)) {
-                throw new Error(array + ": split shouldn't raise an exception with valid string");
+                throw new Error(array + this.MSG_SPLIT_VALID);
             }
         }catch(e){
-            throw new Error(string + ": split shouldn't raise an exception with valid string");
+            throw new Error(string + this.MSG_SPLIT_VALID);
         }
         
     }
