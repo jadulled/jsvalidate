@@ -3,7 +3,7 @@
   <parent>
      <artifactId>bare</artifactId>
      <groupId>ar.com.zauber.maven.poms</groupId>
-     <version>1.0.6</version>
+     <version>1.0.7</version>
   </parent>
   
   <modelVersion>4.0.0</modelVersion>
@@ -15,9 +15,9 @@
 
 
   <scm>
-     <connection>scm:svn:https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/trunk/</connection>
-     <developerConnection>scm:svn:https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/trunk/</developerConnection>
-     <url>https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/trunk/</url>
+     <connection>scm:svn:https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/releases/0.4/</connection>
+     <developerConnection>scm:svn:https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/releases/0.4/</developerConnection>
+     <url>https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/releases/0.4/</url>
   </scm>
 
   <licenses>
