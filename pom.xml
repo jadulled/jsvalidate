@@ -15,9 +15,9 @@
 
 
   <scm>
-     <connection>scm:svn:https://code.zauber.com.ar/repos/sandbox/components/javascript/validate/code/trunk/</connection>
-     <developerConnection>scm:svn:https://code.zauber.com.ar/repos/sandbox/components/javascript/validate/code/trunk/</developerConnection>
-     <url>https://code.zauber.com.ar/repos/sandbox/components/javascript/validate/code/trunk/</url>
+     <connection>scm:svn:https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/trunk/</connection>
+     <developerConnection>scm:svn:https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/trunk/</developerConnection>
+     <url>https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/trunk/</url>
   </scm>
 
   <licenses>
@@ -34,14 +34,14 @@
       <snapshots><enabled>false</enabled></snapshots>
       <id>zauber-code-releases</id>
       <name>Zauber Code Releases</name>
-      <url>https://repo1.zauber.com.ar/zauber/code/releases</url>
+      <url>https://repo1.zaubersoftware.com/zauber/code/releases</url>
     </repository>
     <repository>
       <releases><enabled>false</enabled></releases>
       <snapshots><enabled>true</enabled></snapshots>
       <id>zauber-code-snapshots</id>
       <name>Zauber Code Snapshots</name>
-      <url>https://repo1.zauber.com.ar/zauber/code/snapshots</url>
+      <url>https://repo1.zaubersoftware.com/zauber/code/snapshots</url>
     </repository>
   </repositories>
 
@@ -98,7 +98,7 @@
       <name>Marcos Medrano</name>
       <id>marcos</id>
       <organization>Zauber S.A.</organization>
-      <organizationUrl>http://www.zauber.com.ar/</organizationUrl>
+      <organizationUrl>http://www.zaubersoftware.com/</organizationUrl>
       <roles>
         <role>Developer</role>
 	  </roles>
