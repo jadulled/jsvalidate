@@ -89,8 +89,8 @@ ErrorValidate.prototype = {
          */
         UnhandledError: function(errorMessage){
             return new error.CommonError(errorMessage, "UnhandledError");              
-        },
-}
+        }
+};
 
 var CommonError = function(errorMessage, errorName) {
     var error = new Error(errorMessage);
