@@ -15,10 +15,11 @@
 
 
   <scm>
-     <connection>scm:svn:https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/trunk/</connection>
-     <developerConnection>scm:svn:https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/trunk/</developerConnection>
-     <url>https://code.zaubersoftware.com/repos/sandbox/components/javascript/validate/code/trunk/</url>
+    <connection>scm:git:git@github.com:zaubersoftware/jsvalidate.git</connection>
+    <url>scm:git:git@github.com:zaubersoftware/jsvalidate.git</url>
+    <developerConnection>scm:git:git@github.com:zaubersoftware/jsvalidate.git</developerConnection>
   </scm>
+
 
   <licenses>
      <license>
@@ -47,6 +48,17 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+                <autoVersionSubmodules>true</autoVersionSubmodules>
+                <pushChanges>false</pushChanges>
+        </configuration>
+
+        <version>2.1</version>
+      </plugin>
+
       <plugin>
         <groupId>de.berlios.jsunit</groupId>
 	    <artifactId>jsunit-maven2-plugin</artifactId>
